@@ -36,20 +36,35 @@ public class BellmanFord {
         if ((strLine = br.readLine()) == null) {
             throw new Exception("Not valid input file!");
         }
-        this.numberOfNodes = new Integer(strLine); // convert the string to a number
+
+        try
+        {
+            this.numberOfNodes = new Integer(strLine); // convert the string to a number
+        }
+        catch(NumberFormatException e)
+        {
+            throw new Exception("The value '"+strLine+"' is not a valid number for node count!");
+        }
 
         if ((strLine = br.readLine()) == null) {
             throw new Exception("Not valid input file!");
         }
-        this.numberOfEdges = new Integer(strLine);
+        try
+        {
+            this.numberOfEdges = new Integer(strLine);
+        }
+        catch(NumberFormatException e)
+        {
+            throw new Exception("The value '"+strLine+"' is not a valid number for edge count!");
+        }
 
         for (int i = 0; i < numberOfEdges; i++) {
             if ((strLine = br.readLine()) == null) {
-                throw new Exception("Not valid input file!");
+                throw new Exception("Not valid input file! Every edge has to have one data line.");
             }
             String[] line = strLine.split(" ");
             if (line.length != 3) {
-                throw new Exception("Not valid input file!");
+                throw new Exception("Not valid input file! The edge definitions have to have 3 values.");
             }
 
             edges.add(new Edge(new Integer(line[1]), new Integer(line[0]), new Integer(line[2])));

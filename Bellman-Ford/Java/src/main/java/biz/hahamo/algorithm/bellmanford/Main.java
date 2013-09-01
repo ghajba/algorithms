@@ -1,5 +1,7 @@
 package biz.hahamo.algorithm.bellmanford;
 
+import java.io.FileNotFoundException;
+
 /**
  *
  * @author Hajba, Gábor László (GHajba)
@@ -12,7 +14,20 @@ public class Main {
     public static void main(String[] args) throws Exception {
         BellmanFord bellmanFord = new BellmanFord();
 
-        bellmanFord.readInput("input.txt");
+        try
+        {
+            bellmanFord.readInput("input.txt");
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println("The file 'input.txt' could not be found. Please provide an input for the application.");
+            System.exit(-1);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.exit(-2);
+        }
         bellmanFord.bellmanFord();
         bellmanFord.writeOutput("output.txt");
     }
